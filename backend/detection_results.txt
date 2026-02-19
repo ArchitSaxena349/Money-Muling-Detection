@@ -1,0 +1,85 @@
+--- Detection Results ---
+Suspicious Accounts Found: 11
+Fraud Rings Found: 3
+
+Top 5 Suspicious Accounts:
+[
+  {
+    "account_id": "ACC_00678",
+    "suspicion_score": 40,
+    "detected_patterns": [
+      "cycle_length_3"
+    ],
+    "ring_id": "RING_001"
+  },
+  {
+    "account_id": "ACC_00901",
+    "suspicion_score": 40,
+    "detected_patterns": [
+      "cycle_length_3"
+    ],
+    "ring_id": "RING_001"
+  },
+  {
+    "account_id": "ACC_00345",
+    "suspicion_score": 40,
+    "detected_patterns": [
+      "cycle_length_3"
+    ],
+    "ring_id": "RING_001"
+  },
+  {
+    "account_id": "ACC_00234",
+    "suspicion_score": 40,
+    "detected_patterns": [
+      "cycle_length_3"
+    ],
+    "ring_id": "RING_002"
+  },
+  {
+    "account_id": "ACC_00567",
+    "suspicion_score": 40,
+    "detected_patterns": [
+      "cycle_length_3"
+    ],
+    "ring_id": "RING_002"
+  }
+]
+
+Fraud Rings:
+[
+  {
+    "ring_id": "RING_001",
+    "member_accounts": [
+      "ACC_00345",
+      "ACC_00678",
+      "ACC_00901"
+    ],
+    "pattern_type": "cycle",
+    "risk_score": 90.0
+  },
+  {
+    "ring_id": "RING_002",
+    "member_accounts": [
+      "ACC_00234",
+      "ACC_00567",
+      "ACC_00890"
+    ],
+    "pattern_type": "cycle",
+    "risk_score": 90.0
+  },
+  {
+    "ring_id": "RING_003",
+    "member_accounts": [
+      "ACC_00123",
+      "ACC_00456",
+      "ACC_00789"
+    ],
+    "pattern_type": "cycle",
+    "risk_score": 90.0
+  }
+]
+
+Pattern Distribution:
+  cycle_length_3: 9
+  smurfing_fan_in: 2
