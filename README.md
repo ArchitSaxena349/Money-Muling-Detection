@@ -34,27 +34,21 @@ Suspicion Scoring
 JSON API Response
    ↓
 React + D3 Visualization
+
 🔹 Architecture Components
 1️⃣ Frontend (React + D3.js)
 
 CSV upload interface
-
 API integration
-
 Interactive graph visualization
-
 Highlight suspicious nodes & edges
-
 Display fraud type and risk score
 
 2️⃣ Backend (FastAPI + NetworkX)
 
 Transaction parsing using Pandas
-
 Directed graph creation
-
 Fraud pattern detection
-
 Suspicion scoring engine
 
 REST API response
@@ -73,21 +67,16 @@ LaundroGraph uses graph theory algorithms for pattern detection.
 Objective: Detect circular fund flows (A → B → C → A)
 
 Algorithm Used:
-
 NetworkX.simple_cycles()
-
 Based on Johnson’s Algorithm
 
 Time Complexity:
-
 O((V + E)(C + 1))
 
 Where:
 
 V = Number of nodes
-
 E = Number of edges
-
 C = Number of cycles
 
 🔄 2. Smurfing Detection
@@ -97,11 +86,8 @@ Pattern: Multiple small transactions to/from a single node.
 Logic:
 
 Degree centrality threshold
-
 Amount threshold validation
-
 Time proximity check
-
 Time Complexity:
 
 O(V + E)
@@ -112,9 +98,7 @@ Pattern: Long chains of low-activity accounts.
 Method:
 
 DFS / BFS traversal
-
 Long path detection
-
 Low average transaction filter
 
 Time Complexity:
@@ -125,11 +109,8 @@ O(V + E)
 Pattern: Rapid successive transfers within short time window.
 
 Method:
-
 Timestamp sorting
-
 Sliding window analysis
-
 Time Complexity:
 
 O(N log N)
@@ -148,11 +129,8 @@ High Velocity	35
 🔹 Modifiers
 
 Large total amount → +10 to +25
-
 Multi-pattern involvement → +20
-
 Short execution timeframe → +15
-
 Multi-hop complexity → +10
 
 🔹 Risk Classification
@@ -164,23 +142,15 @@ Score Range	Risk Level
 🔹 Backend
 
 Python
-
 FastAPI
-
 NetworkX
-
 Pandas
 
 🔹 Frontend
 
 React
-
 TypeScript
-
-Vite
-
-D3.js
-
+ViteD3.js
 Tailwind CSS
 
 ⚙ Installation & Setup
@@ -198,16 +168,12 @@ npm install
 npm run dev
 
 Frontend runs at:
-
 http://localhost:3000
 🚀 Usage
 
 Open http://localhost:3000
-
 Upload transaction CSV file
-
 Click Analyze
-
 View:
 
 Detected fraud rings
@@ -221,13 +187,9 @@ Interactive network graph
 ⚠ Known Limitations
 
 Optimized for structured CSV input only
-
 Large graphs (>100k transactions) may slow cycle detection
-
 Rule-based system (no ML anomaly detection)
-
 Batch processing only (no real-time streaming support)
-
 Possible false positives in high-volume legitimate systems
 
 📂 Project Structure
@@ -240,27 +202,21 @@ Possible false positives in high-volume legitimate systems
 │   ├── src/
 │   └── package.json
 └── README.md
-👥 Team
 
+👥 Team
 1.Archit Saxena
 2.Anshika Daksh
 3.Divyanshi Dubey
 4.Divyansh Soni
 
 Backend Development
-
 Graph Algorithm Design
-
 Fraud Detection Engine
 
 🌟 Future Improvements
 
 Real-time transaction monitoring
-
 ML-based anomaly detection
-
 Neo4j graph database integration
-
 Risk dashboard analytics
-
 AI-powered fraud explanation engine
