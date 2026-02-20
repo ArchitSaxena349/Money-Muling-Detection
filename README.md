@@ -1,128 +1,139 @@
-LaundroGraph 🕵️‍♂️💸
-
+🕵️‍♂️ LaundroGraph
 Financial Crime Detection Engine
+
 A Graph-Based Money Laundering Detection System – Built for RIFT 2026
 
-🚀 Overview
+📌 Overview
 
-LaundroGraph is a powerful graph analytics engine that detects complex financial crime patterns like Smurfing, Cycles, Layered Shells, and High Velocity Transactions using advanced graph theory algorithms.
+LaundroGraph is a graph analytics-powered fraud detection engine designed to identify complex money laundering patterns such as:
 
-It transforms transaction datasets into dynamic network graphs and applies topology-based fraud detection models with precision scoring.
+🔁 Cycles (Circular Transactions)
+
+🔄 Smurfing (Fan-in / Fan-out Structuring)
+
+🏢 Layered Shell Accounts
+
+⚡ High Velocity Transfers
+
+The system transforms transaction datasets into directed graphs and applies topology-based detection algorithms with precision-based suspicion scoring.
 
 🏗 System Architecture
-🔹 High-Level Architecture
-CSV Upload → FastAPI Backend → Graph Construction (NetworkX) 
-→ Fraud Detection Engine → Suspicion Scoring 
-→ JSON Response → React + D3 Visualization
-🔹 Components
-1️⃣ Frontend (React + D3)
+🔹 High-Level Flow
+CSV Upload
+   ↓
+FastAPI Backend
+   ↓
+Graph Construction (NetworkX)
+   ↓
+Fraud Detection Engine
+   ↓
+Suspicion Scoring
+   ↓
+JSON API Response
+   ↓
+React + D3 Visualization
+🔹 Architecture Components
+1️⃣ Frontend (React + D3.js)
 
-Upload CSV file
+CSV upload interface
 
-Trigger API call
+API integration
 
-Render graph visualization
+Interactive graph visualization
 
-Highlight suspicious nodes/edges
+Highlight suspicious nodes & edges
 
-Display fraud type & score
+Display fraud type and risk score
 
 2️⃣ Backend (FastAPI + NetworkX)
 
-Parse transaction dataset (Pandas)
+Transaction parsing using Pandas
 
-Build directed graph (NetworkX)
+Directed graph creation
 
-Execute detection algorithms
+Fraud pattern detection
 
-Compute suspicion score
+Suspicion scoring engine
 
-Return structured fraud insights
+REST API response
 
 3️⃣ Data Layer
 
-CSV-based transaction ingestion
-
-Format:
+Input CSV format:
 
 transaction_id, sender_id, receiver_id, amount, timestamp
 🧠 Algorithm Approach
 
-LaundroGraph uses graph topology-based detection methods.
+LaundroGraph uses graph theory algorithms for pattern detection.
 
-1️⃣ Cycle Detection (Circular Laundering)
+🔁 1. Cycle Detection
 
-Goal: Detect loops (A → B → C → A)
+Objective: Detect circular fund flows (A → B → C → A)
 
-Method Used:
+Algorithm Used:
 
 NetworkX.simple_cycles()
 
-Based on Johnson’s algorithm
+Based on Johnson’s Algorithm
 
 Time Complexity:
 
 O((V + E)(C + 1))
+
 Where:
 
-V = Nodes
+V = Number of nodes
 
-E = Edges
+E = Number of edges
 
 C = Number of cycles
 
-2️⃣ Smurfing Detection (Fan-in / Fan-out)
+🔄 2. Smurfing Detection
 
-Pattern:
-Multiple small transactions to one node OR from one node
+Pattern: Multiple small transactions to/from a single node.
 
 Logic:
 
 Degree centrality threshold
 
-Amount threshold check
+Amount threshold validation
 
-Temporal proximity validation
+Time proximity check
 
 Time Complexity:
 
 O(V + E)
+🏢 3. Layered Shell Detection
 
-3️⃣ Layered Shell Detection
-
-Pattern:
-Long low-activity chains (A → B → C → D → E)
+Pattern: Long chains of low-activity accounts.
 
 Method:
 
 DFS / BFS traversal
 
-Detect long simple paths
+Long path detection
 
-Low average transaction amount
+Low average transaction filter
 
 Time Complexity:
 
 O(V + E)
+⚡ 4. High Velocity Transactions
 
-4️⃣ High Velocity Transactions
-
-Pattern:
-Rapid successive transactions within short time window
+Pattern: Rapid successive transfers within short time window.
 
 Method:
 
-Sort by timestamp
+Timestamp sorting
 
 Sliding window analysis
 
 Time Complexity:
 
-O(N log N) (due to sorting)
-
+O(N log N)
 🎯 Suspicion Score Methodology
 
-Each detected entity receives a Suspicion Score.
+Each detected entity is assigned a Suspicion Score.
 
 🔹 Formula
 Suspicion Score = Base Score + Pattern Modifiers + Risk Amplifiers
@@ -134,19 +145,19 @@ Layered Shell	45
 High Velocity	35
 🔹 Modifiers
 
-Large Total Amount → +10 to +25
+Large total amount → +10 to +25
 
-Cross-pattern involvement → +20
+Multi-pattern involvement → +20
 
-Short Timeframe execution → +15
+Short execution timeframe → +15
 
 Multi-hop complexity → +10
 
-🔹 Final Classification
+🔹 Risk Classification
 Score Range	Risk Level
-0–40	Low Risk
-41–70	Medium
-71–100	High Risk
+0 – 40	Low Risk
+41 – 70	Medium Risk
+71 – 100	High Risk
 🛠 Tech Stack
 🔹 Backend
 
@@ -176,7 +187,7 @@ cd backend
 pip install -r requirements.txt
 uvicorn main:app --reload --host 0.0.0.0 --port 8000
 
-Server runs at:
+Backend runs at:
 
 http://localhost:8000
 2️⃣ Frontend Setup
@@ -187,50 +198,35 @@ npm run dev
 Frontend runs at:
 
 http://localhost:3000
-3️⃣ Usage Steps
+🚀 Usage
 
-Open browser → http://localhost:3000
+Open http://localhost:3000
 
-Upload CSV transaction file
+Upload transaction CSV file
 
 Click Analyze
 
 View:
 
-Suspicious Accounts
+Detected fraud rings
 
-Fraud Type
+Suspicious accounts
 
-Suspicion Score
+Risk scores
 
-Interactive Graph
+Interactive network graph
 
 ⚠ Known Limitations
 
-Works best with structured CSV input
+Optimized for structured CSV input only
 
 Large graphs (>100k transactions) may slow cycle detection
 
-False positives possible in high-volume legitimate systems
+Rule-based system (no ML anomaly detection)
 
-No real-time streaming support (batch processing only)
+Batch processing only (no real-time streaming support)
 
-No ML-based anomaly detection (rule-based engine)
-
-👥 Team Members
-
-Archit Saxena
-Anshika Daksh
-Divyanshi Dubey
-Divyansh Soni
-
-Backend Development
-
-Fraud Algorithm Design
-
-Graph Analytics
-
-(Add more team members here if applicable)
+Possible false positives in high-volume legitimate systems
 
 📂 Project Structure
 /LaundroGraph
@@ -242,16 +238,27 @@ Graph Analytics
 │   ├── src/
 │   └── package.json
 └── README.md
-💡 Future Improvements
+👥 Team
+
+1.Archit Saxena
+2.Anshika Daksh
+3.Divyanshi Dubey
+4.Divyansh Soni
+
+Backend Development
+
+Graph Algorithm Design
+
+Fraud Detection Engine
+
+🌟 Future Improvements
 
 Real-time transaction monitoring
 
 ML-based anomaly detection
 
-Database integration (PostgreSQL / Neo4j)
+Neo4j graph database integration
+
+Risk dashboard analytics
 
 AI-powered fraud explanation engine
-
-Dashboard analytics panel
-
-Built with ❤️ for RIFT 2026 Hackathon
