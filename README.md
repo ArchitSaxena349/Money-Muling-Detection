@@ -204,7 +204,7 @@ Possible false positives in high-volume legitimate systems
 └── README.md
 
 👥 Team
-1.Archit Saxena
+1.Archit Saxena(Team Lead)
 2.Anshika Daksh
 3.Divyanshi Dubey
 4.Divyansh Soni
