@@ -3,6 +3,8 @@ Financial Crime Detection Engine
 
 A Graph-Based Money Laundering Detection System – Built for RIFT 2026
 
+Live Demo URL:- https://github.com/ArchitSaxena349/Money-Muling-Detection
+
 📌 Overview
 
 LaundroGraph is a graph analytics-powered fraud detection engine designed to identify complex money laundering patterns such as:
