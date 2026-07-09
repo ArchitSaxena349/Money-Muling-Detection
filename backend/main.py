@@ -1,4 +1,4 @@
-from fastapi import FastAPI, UploadFile, File
+from fastapi import FastAPI, UploadFile, File, HTTPException
 import pandas as pd
 import networkx as nx
 import time
@@ -25,17 +25,18 @@ async def analyze(file: UploadFile = File(...)):
         try:
             df = pd.read_csv(file.file)
         except Exception:
-            return {"error": "Invalid CSV file"}
+            raise HTTPException(status_code=400, detail="Invalid CSV file")
 
         required_columns = {"transaction_id", "sender_id", "receiver_id", "amount", "timestamp"}
         if not required_columns.issubset(df.columns):
-            return {"error": f"Missing required columns: {required_columns - set(df.columns)}"}
+            missing = sorted(required_columns - set(df.columns))
+            raise HTTPException(status_code=400, detail=f"Missing required columns: {', '.join(missing)}")
 
         try:
             df["amount"] = pd.to_numeric(df["amount"])
             df["timestamp"] = pd.to_datetime(df["timestamp"])
         except Exception:
-             return {"error": "Invalid data types for amount or timestamp"}
+            raise HTTPException(status_code=400, detail="Invalid data types for amount or timestamp")
 
         # 2. Graph Construction
         G = nx.DiGraph()
@@ -100,5 +101,7 @@ async def analyze(file: UploadFile = File(...)):
             "summary": summary
         }
 
+    except HTTPException:
+        raise
     except Exception as e:
-        return {"error": str(e)}
+        raise HTTPException(status_code=500, detail=str(e))

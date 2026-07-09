@@ -28,12 +28,22 @@ export default function App() {
         body: formData,
       });
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || 'Analysis failed');
+      const backendData = await response.json();
+
+      if (!response.ok || backendData.error) {
+        throw new Error(backendData.error || backendData.detail || `Analysis failed (${response.status})`);
       }
 
-      const backendData = await response.json();
+      if (
+        !Array.isArray(backendData.transactions) ||
+        !Array.isArray(backendData.suspicious_accounts) ||
+        !Array.isArray(backendData.fraud_rings) ||
+        !backendData.summary ||
+        !Array.isArray(backendData.nodes) ||
+        !Array.isArray(backendData.edges)
+      ) {
+        throw new Error('The analysis service returned an incomplete response');
+      }
 
       setTransactions(backendData.transactions);
 
@@ -49,9 +59,10 @@ export default function App() {
         links: backendData.edges
       });
 
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error("Analysis Error:", err);
-      setError(`Analysis Failed: ${err.message}`);
+      const message = err instanceof Error ? err.message : 'Unexpected error';
+      setError(`Analysis Failed: ${message}`);
     } finally {
       setIsLoading(false);
     }
@@ -59,7 +70,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen text-slate-200 font-sans selection:bg-blue-500/30">
-      <div className="fixed inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 pointer-events-none z-0"></div>
+      <div className="noise-overlay fixed inset-0 pointer-events-none z-0"></div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
         {/* Header */}

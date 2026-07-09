@@ -21,6 +21,14 @@
       radial-gradient(circle at 90% 80%, rgba(139, 92, 246, 0.1) 0%, transparent 20%);
     background-attachment: fixed;
   }
+
+  .noise-overlay {
+    opacity: 0.12;
+    background-image:
+      repeating-radial-gradient(circle at 20% 30%, transparent 0, rgba(255, 255, 255, 0.16) 1px, transparent 2px, transparent 5px),
+      repeating-radial-gradient(circle at 80% 70%, transparent 0, rgba(255, 255, 255, 0.1) 1px, transparent 2px, transparent 7px);
+    background-size: 11px 13px, 17px 19px;
+  }
 }
 
 @layer utilities {
